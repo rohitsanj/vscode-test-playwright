@@ -176,6 +176,13 @@ export const test = base.extend<VSCodeTestFixtures & VSCodeTestOptions & Interna
       executablePath: installPath,
       env,
       args: [
+        // Stolen from https://github.com/stefanpenner/_automate-vscode/blob/500645a9065820a27113611a2899586cc6525d45/setup.mjs#L19-L21
+        process.platform === 'linux' && '--disable-dev-shm-usage',
+        process.platform === 'linux' && '--disable-gpu',
+        process.platform === 'darwin' && '--disable-gpu',
+        '--verbose',
+        '--use-inmemory-secretstorage',
+        '--enable-smoke-test-driver',
         // Stolen from https://github.com/microsoft/vscode-test/blob/0ec222ef170e102244569064a12898fb203e5bb7/lib/runTest.ts#L126-L160
         // https://github.com/microsoft/vscode/issues/84238
         '--no-sandbox',
